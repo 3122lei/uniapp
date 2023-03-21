@@ -11,7 +11,14 @@
 		}
 	}
 </script>
-
+<style>
+	page {
+		overflow: hidden;
+		/*#ifdef H5*/
+		height: 100%;
+		/*#endif*/
+	}
+</style>
 <style lang="scss">
 	/*每个页面公共css */
 	@import "@/uni_modules/uview-ui/index.scss";

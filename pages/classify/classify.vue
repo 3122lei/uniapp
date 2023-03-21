@@ -1,7 +1,6 @@
 <template>
-	<view class="content">
-
-		<u-button type="primary" text="确定"></u-button>
+	<view>
+		
 	</view>
 </template>
 
@@ -9,14 +8,11 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				
 			}
 		},
-		onLoad() {
-
-		},
 		methods: {
-
+			
 		}
 	}
 </script>
