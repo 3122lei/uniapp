@@ -11,7 +11,7 @@
 			const code = options?.code;
 			console.log(options);
 			uni.request({
-				url: "http//zxwyit.cn:8080/m.api",
+				url: "http://zxwyit.cn:8989/m.api",
 				method: "post",
 				data: {
 					_gp: 'user',
