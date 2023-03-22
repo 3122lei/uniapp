@@ -44,17 +44,15 @@
 				"enablePullDownRefresh": false
 			}
 
+		}, {
+			"path": "public/h5login",
+			"style": {
+				"navigationBarTitleText": "h5登录",
+				"enablePullDownRefresh": false
+			}
+
 		}
-	    ,{
-            "path" : "public/h5login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

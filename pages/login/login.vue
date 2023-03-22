@@ -139,6 +139,7 @@
 			},
 			//微信公众号h5
 			webH5Login() {
+				console.log('webH5Login');
 				const BACKURL = encodeURIComponent(CALL_URL);
 				const url =
 					"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + WX_AppID +
@@ -152,7 +153,7 @@
 					provider: 'weixin',
 					success: function(wxres) {
 						uni.request({
-							url: 'http://zwxyit.cn:8989/m.api',
+							url: 'http://192.168.1.188:8080/m.api',
 							method: 'POST',
 							data: {
 								_gp: 'user',
