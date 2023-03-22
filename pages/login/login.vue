@@ -45,6 +45,10 @@
 		verifyPhone,
 		verifPassword
 	} from '../../utils/verify.js';
+	import {
+		WX_AppID,
+		CALL_URL
+	} from '@/config/index.js'
 	export default {
 		data() {
 			return {
@@ -133,11 +137,49 @@
 				this.MPLogin()
 				// #endif
 			},
+			//微信公众号h5
 			webH5Login() {
-				console.log('webH5Login');
+				const BACKURL = encodeURIComponent(CALL_URL);
+				const url =
+					"https://open.weixin.qq.com/connect/oauth2/authorize?appid=" + WX_AppID +
+					"&redirect_uri=" + BACKURL + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+				window.location.href = url;
 			},
+			//手机App端登录
 			webAppLogin() {
 				console.log('webAppLogin');
+				uni.login({
+					provider: 'weixin',
+					success: function(wxres) {
+						uni.request({
+							url: 'http://zwxyit.cn:8989/m.api',
+							method: 'POST',
+							data: {
+								_gp: 'user',
+								_mt: 'thirdPartLogin',
+								loginType: 2,
+								raw: JSON.stringify(wxres)
+							},
+							header: {
+								"Content-Type": "application/x-www-form-urlencoded"
+							},
+							success(res) {
+								let data = res.data;
+								if ('成功' === data.errmsg) {
+									uni.$u.toast('登陆成功！')
+									uni.setStorageSync("user", data.data)
+									uni.setStorageSync("token", data.data.accessToken)
+									uni.switchTab({
+										url: '/pages/index/index'
+									});
+								} else {
+									uni.$u.toast(data.errmsg)
+								}
+							}
+						})
+					}
+				})
+
 			},
 			MPLogin() {
 				console.log('MPLogin');
@@ -160,6 +202,7 @@
 								let data = res.data;
 								if ('成功' === data.errmsg) {
 									uni.$u.toast('登陆成功！')
+									uni.setStorageSync("user", data.data)
 									uni.setStorageSync("token", data.data.accessToken)
 									uni.switchTab({
 										url: '/pages/index/index'
