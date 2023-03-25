@@ -13,7 +13,7 @@
 </script>
 <style>
 	page {
-		overflow: hidden;
+		/* overflow: hidden; */
 		/*#ifdef H5*/
 		height: 100%;
 		/*#endif*/

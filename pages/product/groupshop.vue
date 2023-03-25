@@ -1,8 +1,6 @@
 <template>
 	<view>
-		<view class="logout" @tap="logout">
-			退出
-		</view>
+		团购
 	</view>
 </template>
 
@@ -14,11 +12,7 @@
 			}
 		},
 		methods: {
-			logout() {
-				uni.reLaunch({
-					url: "/pages/login/login"
-				})
-			}
+
 		}
 	}
 </script>

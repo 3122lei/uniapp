@@ -1,8 +1,6 @@
 <template>
 	<view>
-		<view class="logout" @tap="logout">
-			退出
-		</view>
+
 	</view>
 </template>
 
@@ -10,15 +8,14 @@
 	export default {
 		data() {
 			return {
-
+				id: '',
 			}
 		},
 		methods: {
-			logout() {
-				uni.reLaunch({
-					url: "/pages/login/login"
-				})
-			}
+
+		},
+		onLoad(options) {
+			console.log(options.id);
 		}
 	}
 </script>

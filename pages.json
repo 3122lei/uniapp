@@ -14,7 +14,19 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "主页"
+				"navigationBarTitleText": "主页",
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"searchInput": {
+							"backgroundColor": "rgba(231,231,231,0.7)",
+							"borderRadius": "16px",
+							"placeholder": "请搜索宝贝名称",
+							"disabled": true,
+							"placeholderColor": "#606266"
+						}
+					}
+				}
 			}
 		}, {
 			"path": "pages/car/car",
@@ -33,14 +45,14 @@
 		}, {
 			"path": "pages/classify/classify",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "分类",
 				"enablePullDownRefresh": false
 			}
 
 		}, {
 			"path": "pages/My/My",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "个人",
 				"enablePullDownRefresh": false
 			}
 
@@ -48,6 +60,27 @@
 			"path": "public/h5login",
 			"style": {
 				"navigationBarTitleText": "h5登录",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/Register/Register",
+			"style": {
+				"navigationBarTitleText": "用户注册",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/Search/Search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
+			"path": "pages/product/groupshop",
+			"style": {
+				"navigationBarTitleText": "团购",
 				"enablePullDownRefresh": false
 			}
 
@@ -93,5 +126,26 @@
 			}
 		]
 
-	}
+	},
+	"subPackages": [{
+		"root": "ModuleA",
+		"pages": [
+
+			{
+				"path": "ShopList/ShopList",
+				"style": {
+					"navigationBarTitleText": "商品列表",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "shopDetails/shopDetails",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}
+		]
+	}]
 }

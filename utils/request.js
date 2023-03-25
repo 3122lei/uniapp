@@ -1,15 +1,14 @@
 const BASE_URL = 'http://192.168.1.188:8080/m.api'
-import qs from 'qs'
 
 function request(method = "GET", data = {}) {
-	qs.stringify(data)
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: BASE_URL,
 			method,
 			data,
 			header: {
-				accessToken: uni.getStorageSync("token")
+				accessToken: uni.getStorageSync("token"),
+				"Content-Type": "application/x-www-form-urlencoded"
 			},
 			success: res => {
 				console.log(res);
@@ -25,6 +24,8 @@ function request(method = "GET", data = {}) {
 		})
 	})
 }
+
+
 export default request
 //全局挂载   uni.$http = request
 //vue3 用app.config.globalProperties.$myRuquest= request 

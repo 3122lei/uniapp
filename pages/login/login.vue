@@ -25,7 +25,7 @@
 			<div class="login-item form-item">
 				<div style="color: cornflowerblue;">忘记密码</div>
 				<div class="form-item-div"></div>
-				<div>还没有账号，<span style="color: cornflowerblue;">立即注册</span></div>
+				<div>还没有账号，<span style="color: cornflowerblue;" @click="GoReg">立即注册</span></div>
 			</div>
 			<!--  -->
 			<div class="Divder form-item">
@@ -53,7 +53,7 @@
 		data() {
 			return {
 				form: {
-					phone: '16666666666',
+					phone: '13717154024',
 					password: '12345678a',
 
 				},
@@ -104,6 +104,7 @@
 				}
 			},
 			logins(data) {
+				console.log('登录');
 				this.$Ruquest('get', data).then(res => {
 					console.log(res);
 					const {
@@ -124,6 +125,7 @@
 
 				})
 			},
+			//第三方登录
 			thirdParty() {
 				//wxb230ba20ae7426c8
 				// #ifdef  H5
@@ -146,74 +148,105 @@
 					"&redirect_uri=" + BACKURL + "&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
 				window.location.href = url;
 			},
-			//手机App端登录
+			//手机App第三方登录
 			webAppLogin() {
 				console.log('webAppLogin');
+				let that = this;
 				uni.login({
 					provider: 'weixin',
 					success: function(wxres) {
-						uni.request({
-							url: 'http://192.168.1.188:8080/m.api',
-							method: 'POST',
-							data: {
-								_gp: 'user',
-								_mt: 'thirdPartLogin',
-								loginType: 2,
-								raw: JSON.stringify(wxres)
-							},
-							header: {
-								"Content-Type": "application/x-www-form-urlencoded"
-							},
-							success(res) {
-								let data = res.data;
-								if ('成功' === data.errmsg) {
-									uni.$u.toast('登陆成功！')
-									uni.setStorageSync("user", data.data)
-									uni.setStorageSync("token", data.data.accessToken)
-									uni.switchTab({
-										url: '/pages/index/index'
-									});
-								} else {
-									uni.$u.toast(data.errmsg)
+						that.$Ruquest('POST', {
+							_gp: 'user',
+							_mt: 'thirdPartLogin',
+							loginType: 2,
+							raw: JSON.stringify(wxres)
+						}).then(res => {
+							console.log(res);
+							const {
+								data: {
+									data,
+									errmsg
 								}
+							} = res;
+							if ('成功' === errmsg) {
+								uni.$u.toast('登陆成功！')
+								uni.setStorageSync("token", data.accessToken)
+								uni.switchTab({
+									url: '/pages/index/index'
+								});
+							} else {
+								uni.$u.toast(errmsg)
 							}
+
 						})
+						// uni.request({
+						// 	url: 'http://192.168.1.188:8080/m.api',
+						// 	method: 'POST',
+						// 	data: {
+						// 		_gp: 'user',
+						// 		_mt: 'thirdPartLogin',
+						// 		loginType: 2,
+						// 		raw: JSON.stringify(wxres)
+						// 	},
+						// 	header: {
+						// 		"Content-Type": "application/x-www-form-urlencoded"
+						// 	},
+						// 	success(res) {
+
+						// 		let data = res.data;
+						// 		if ('成功' === data.errmsg) {
+						// 			uni.$u.toast('登陆成功！')
+						// 			uni.setStorageSync("user", data.data)
+						// 			uni.setStorageSync("token", data.data.accessToken)
+						// 			uni.switchTab({
+						// 				url: '/pages/index/index'
+						// 			});
+						// 		} else {
+						// 			uni.$u.toast(data.errmsg)
+						// 		}
+						// 	}
+						// })
 					}
 				})
 
 			},
+			// 微信小程序第三方登录
 			MPLogin() {
 				console.log('MPLogin');
+				let that = this;
 				uni.login({
 					provider: 'weixin',
 					success: function(wxres) {
-						uni.request({
-							url: 'http://192.168.1.188:8080/m.api',
-							method: 'POST',
-							data: {
-								_gp: 'user',
-								_mt: 'thirdPartLogin',
-								loginType: 1,
-								raw: JSON.stringify(wxres)
-							},
-							header: {
-								"Content-Type": "application/x-www-form-urlencoded"
-							},
-							success(res) {
-								let data = res.data;
-								if ('成功' === data.errmsg) {
-									uni.$u.toast('登陆成功！')
-									uni.setStorageSync("user", data.data)
-									uni.setStorageSync("token", data.data.accessToken)
-									uni.switchTab({
-										url: '/pages/index/index'
-									});
-								} else {
-									uni.$u.toast(data.errmsg)
+						that.$Ruquest('POST', {
+							_gp: 'user',
+							_mt: 'thirdPartLogin',
+							loginType: 1,
+							raw: JSON.stringify(wxres)
+						}).then(res => {
+							console.log(res);
+							const {
+								data: {
+									data,
+									errmsg
 								}
+							} = res;
+							if ('成功' === errmsg) {
+								uni.$u.toast('登陆成功！')
+								uni.setStorageSync("token", data.accessToken)
+								uni.switchTab({
+									url: '/pages/index/index'
+								});
+							} else {
+								uni.$u.toast(errmsg)
 							}
+
 						})
 					}
+				})
+			},
+			GoReg() {
+				uni.navigateTo({
+					url: "/pages/Register/Register"
 				})
 			}
 		},
@@ -269,7 +302,10 @@
 				margin-bottom: 20px;
 				/*#endif*/
 
-				/*#ifdef  MP /APP */
+				/*#ifdef  MP */
+				margin-bottom: 20px;
+				/*#endif*/
+				/*#ifdef  APP */
 				margin-bottom: 20px;
 				/*#endif*/
 
